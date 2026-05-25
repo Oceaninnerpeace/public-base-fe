@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,en-US",
+  "words": [
+    "antdv",
+    "antd",
+    "axios",
+    "dayjs",
+    "iconify",
+    "nprogress",
+    "oxfmt",
+    "oxlint",
+    "pinia",
+    "publint",
+    "stylelint",
+    "unplugin",
+    "vite",
+    "vitejs",
+    "vueuse",
+  ],
+  "ignorePaths": ["node_modules", "dist", "pnpm-lock.yaml"]
+}

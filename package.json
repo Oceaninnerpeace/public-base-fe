@@ -1,0 +1,97 @@
+{
+  "name": "public-base-fe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "公司公共底座前端主应用（Vue3 + TS + Ant Design Vue + Qiankun）",
+  "scripts": {
+    "dev": "vite --mode development",
+    "dev:test": "vite --mode test",
+    "build": "vue-tsc -b && vite build --mode production",
+    "build:request": "pnpm --filter @Oceaninnerpeace/public-base-request build",
+    "build:test": "vue-tsc -b && vite build --mode test",
+    "build:staging": "vue-tsc -b && vite build --mode staging",
+    "preview": "vite preview",
+    "preview:prod": "vite preview --mode production",
+    "typecheck": "vue-tsc -b --noEmit",
+    "lint": "pnpm run lint:oxlint && pnpm run lint:eslint && pnpm run lint:style",
+    "lint:oxlint": "oxlint",
+    "lint:eslint": "eslint .",
+    "lint:style": "stylelint \"**/*.{css,less,vue}\"",
+    "lint:fix": "eslint . --fix && stylelint \"**/*.{css,less,vue}\" --fix",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "spell": "cspell lint --no-progress \"**/*.{ts,tsx,vue,md,json}\"",
+    "publint": "publint",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run spell && pnpm run publint",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@Oceaninnerpeace/public-base-request": "workspace:*",
+    "@ant-design/icons-vue": "7.0.1",
+    "@vueuse/core": "13.2.0",
+    "ant-design-vue": "4.2.6",
+    "axios": "1.9.0",
+    "clsx": "2.1.1",
+    "dayjs": "1.11.13",
+    "js-cookie": "3.0.5",
+    "nprogress": "0.2.0",
+    "pinia": "3.0.2",
+    "pinia-plugin-persistedstate": "4.3.0",
+    "qiankun": "2.10.16",
+    "tailwind-merge": "3.3.0",
+    "vue": "3.5.13",
+    "vue-json-pretty": "2.4.0",
+    "vue-router": "4.5.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
+    "@eslint/js": "9.27.0",
+    "@tailwindcss/vite": "4.1.7",
+    "@tsconfig/node22": "22.0.0",
+    "@types/js-cookie": "3.0.6",
+    "@types/node": "22.15.21",
+    "@types/nprogress": "0.2.3",
+    "@vitejs/plugin-vue": "5.2.4",
+    "@vue/tsconfig": "0.7.0",
+    "cspell": "9.0.2",
+    "eslint": "9.27.0",
+    "eslint-plugin-tailwindcss": "3.18.0",
+    "eslint-plugin-vue": "10.1.0",
+    "globals": "16.2.0",
+    "husky": "9.1.7",
+    "less": "4.3.0",
+    "lint-staged": "15.5.2",
+    "oxfmt": "0.16.0",
+    "oxlint": "1.0.0",
+    "postcss-html": "1.8.0",
+    "publint": "0.3.12",
+    "stylelint": "16.19.1",
+    "stylelint-config-recess-order": "6.0.0",
+    "stylelint-config-standard": "38.0.0",
+    "stylelint-config-standard-vue": "1.0.0",
+    "tailwindcss": "4.1.7",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.32.1",
+    "unplugin-vue-components": "28.5.0",
+    "vite": "6.3.5",
+    "vue-tsc": "2.2.10"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": [
+      "oxlint",
+      "eslint --fix"
+    ],
+    "*.{css,less,vue}": [
+      "stylelint --fix"
+    ],
+    "*.{ts,tsx,vue,json,md}": [
+      "oxfmt --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.0.0"
+  }
+}
