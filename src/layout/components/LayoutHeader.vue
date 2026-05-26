@@ -7,13 +7,18 @@ import {
 import { useFullscreen } from '@vueuse/core';
 
 import { appEnv } from '@/config';
+import { useLayoutStore } from '@/store/layout';
 
+import { useMixedMenu } from '../hooks/useMixedMenu';
 import LayoutAppSwitcher from './LayoutAppSwitcher.vue';
 import LayoutBreadcrumb from './LayoutBreadcrumb.vue';
+import LayoutHeaderMenu from './LayoutHeaderMenu.vue';
 import LayoutModeSwitch from './LayoutModeSwitch.vue';
 
 const emit = defineEmits<{ refresh: [] }>();
 
+const layoutStore = useLayoutStore();
+const mixed = useMixedMenu();
 const { isFullscreen, toggle: toggleFullscreen } = useFullscreen();
 </script>
 
@@ -24,7 +29,14 @@ const { isFullscreen, toggle: toggleFullscreen } = useFullscreen();
         <span class="layout-header__brand-icon">P</span>
         <span class="layout-header__brand-text">{{ appEnv.title }}</span>
       </div>
-      <LayoutAppSwitcher />
+      <LayoutHeaderMenu
+        v-if="layoutStore.isHeaderMixedNav"
+        :menus="mixed.rootMenus.value"
+        :active-path="mixed.headerActive.value"
+        @select="mixed.handleRootSelect"
+      />
+
+      <LayoutAppSwitcher v-else />
       <LayoutBreadcrumb class="layout-header__breadcrumb" />
     </div>
     <div class="layout-header__right">

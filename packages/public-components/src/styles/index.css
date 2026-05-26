@@ -1,0 +1,8 @@
+/* 公共组件库基础样式（可按项目主题覆盖） */
+.pb-query-bar .ant-form-item {
+  margin-bottom: 12px;
+}
+
+.pb-table .ant-table {
+  background: #fff;
+}

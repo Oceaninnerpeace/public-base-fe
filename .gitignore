@@ -1,5 +1,9 @@
 node_modules
 dist
+.npmrc
+packages/*/.npmrc
+!.npmrc.example
+!packages/*/.npmrc.example
 dist-ssr
 *.local
 .env.local

@@ -1,0 +1,43 @@
+{
+  "name": "@Oceaninnerpeace/public-base-components",
+  "version": "0.1.0",
+  "description": "公共中后台组件库（Ant Design Vue 二次封装 + 业务高频组件）",
+  "type": "module",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oceaninnerpeace/public-base-fe.git",
+    "directory": "packages/public-components"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./style.css": "./src/styles/index.css"
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "vue-tsc -p tsconfig.build.json --noEmit && vite build",
+    "prepublishOnly": "pnpm run build && node ./scripts/prepare-publish-exports.mjs",
+    "postpublish": "node ./scripts/restore-dev-exports.mjs"
+  },
+  "peerDependencies": {
+    "@ant-design/icons-vue": "^7.0.0",
+    "ant-design-vue": "^4.2.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "ant-design-vue": "^4.2.6",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.11",
+    "vite-plugin-dts": "^4.5.0",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.0"
+  }
+}

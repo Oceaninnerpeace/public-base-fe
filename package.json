@@ -9,6 +9,7 @@
     "dev:test": "vite --mode test",
     "build": "vue-tsc -b && vite build --mode production",
     "build:request": "pnpm --filter @Oceaninnerpeace/public-base-request build",
+    "build:components": "pnpm --filter @Oceaninnerpeace/public-base-components build",
     "build:test": "vue-tsc -b && vite build --mode test",
     "build:staging": "vue-tsc -b && vite build --mode staging",
     "preview": "vite preview",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "@Oceaninnerpeace/public-base-request": "workspace:*",
+    "@Oceaninnerpeace/public-base-components": "workspace:*",
     "@ant-design/icons-vue": "7.0.1",
     "@vueuse/core": "13.2.0",
     "ant-design-vue": "4.2.6",
@@ -79,15 +81,15 @@
     "vue-tsc": "2.2.10"
   },
   "lint-staged": {
-    "*.{ts,tsx,vue}": [
+    "src/**/*.{ts,tsx,vue}": [
       "oxlint",
       "eslint --fix"
     ],
-    "*.{css,less,vue}": [
+    "src/**/*.{css,less,vue}": [
       "stylelint --fix"
     ],
     "*.{ts,tsx,vue,json,md}": [
-      "oxfmt --write"
+      "oxfmt"
     ]
   },
   "engines": {

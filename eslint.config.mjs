@@ -1,17 +1,15 @@
 import js from '@eslint/js';
 import pluginVue from 'eslint-plugin-vue';
-import tailwindPlugin from 'eslint-plugin-tailwindcss';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'coverage', 'public'],
+    ignores: ['dist', 'node_modules', 'coverage', 'public', 'packages/**'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/recommended'],
-  ...tailwindPlugin.configs['flat/recommended'],
   {
     files: ['**/*.{ts,tsx,vue}'],
     languageOptions: {
@@ -36,15 +34,6 @@ export default tseslint.config(
       'vue/component-name-in-template-casing': ['warn', 'PascalCase'],
       'vue/block-order': ['warn', { order: ['script', 'template', 'style'] }],
       'vue/attributes-order': 'warn',
-    },
-  },
-  {
-    settings: {
-      tailwindcss: {
-        config: 'tailwind.config.ts',
-        callees: ['classnames', 'clsx', 'cn'],
-        cssFiles: ['src/styles/tailwind.css'],
-      },
     },
   },
 );

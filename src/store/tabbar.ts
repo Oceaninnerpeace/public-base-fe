@@ -14,14 +14,14 @@ export interface TabItem {
 export const useTabbarStore = defineStore('tabbar', () => {
   const tabs = ref<TabItem[]>([
     {
-      path: '/dashboard',
-      fullPath: '/dashboard',
-      title: '工作台',
-      name: 'Dashboard',
+      path: '/portal',
+      fullPath: '/portal',
+      title: '应用中心',
+      name: 'Portal',
       affix: true,
     },
   ]);
-  const activeKey = ref('/dashboard');
+  const activeKey = ref('/portal');
 
   function addTab(route: RouteLocationNormalized) {
     const { path, fullPath, meta, name } = route;
@@ -52,7 +52,7 @@ export const useTabbarStore = defineStore('tabbar', () => {
     tabs.value.splice(index, 1);
     if (activeKey.value === path) {
       const next = tabs.value[index] ?? tabs.value[index - 1];
-      return next?.fullPath ?? '/dashboard';
+      return next?.fullPath ?? '/portal';
     }
     return null;
   }
@@ -64,8 +64,8 @@ export const useTabbarStore = defineStore('tabbar', () => {
 
   function closeAll() {
     tabs.value = tabs.value.filter((t) => t.affix);
-    activeKey.value = tabs.value[0]?.path ?? '/dashboard';
-    return tabs.value[0]?.fullPath ?? '/dashboard';
+    activeKey.value = tabs.value[0]?.path ?? '/portal';
+    return tabs.value[0]?.fullPath ?? '/portal';
   }
 
   function setActive(path: string) {
@@ -75,14 +75,14 @@ export const useTabbarStore = defineStore('tabbar', () => {
   function reset() {
     tabs.value = [
       {
-        path: '/dashboard',
-        fullPath: '/dashboard',
-        title: '工作台',
-        name: 'Dashboard',
+        path: '/portal',
+        fullPath: '/portal',
+        title: '应用中心',
+        name: 'Portal',
         affix: true,
       },
     ];
-    activeKey.value = '/dashboard';
+    activeKey.value = '/portal';
   }
 
   return {

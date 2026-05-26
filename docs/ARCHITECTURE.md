@@ -12,8 +12,9 @@
 | 包 | 路径 | 说明 |
 |----|------|------|
 | `@Oceaninnerpeace/public-base-request` | `packages/public-request` | 公共 Axios 工厂，**在此维护与发布** |
+| `@Oceaninnerpeace/public-base-components` | `packages/public-components` | 公共中后台组件库（Pb* 组件） |
 
-子应用（智慧电站等）通过 GitHub Packages 或 `file:../public-base-fe/packages/public-request` 引用。
+子应用通过 GitHub Packages 或 `file:../public-base-fe/packages/...` 引用。
 
 ## 基座 vs 子应用
 

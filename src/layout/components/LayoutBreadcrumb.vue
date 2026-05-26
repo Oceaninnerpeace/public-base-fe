@@ -21,7 +21,7 @@ const items = computed(() => {
   const list: { title: string; path?: string }[] = [];
 
   if (props.showHome) {
-    list.push({ title: '首页', path: '/dashboard' });
+    list.push({ title: '应用中心', path: '/portal' });
   }
 
   for (const match of route.matched) {
