@@ -1,5 +1,6 @@
 ﻿import type { RouteLocationNormalized } from 'vue-router';
 
+import { findPortalAppByPath } from '@/config/portal-apps';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -23,24 +24,43 @@ export const useTabbarStore = defineStore('tabbar', () => {
   ]);
   const activeKey = ref('/portal');
 
-  function addTab(route: RouteLocationNormalized) {
-    const { path, fullPath, meta, name } = route;
-    if (!path || path === '/login' || meta?.hideInMenu) return;
+  /**
+   * 页签唯一键：微前端子应用按 activeRule 合并（避免 /micro/uav 与 /micro/uav/xxx 各开一个同名 Tab）
+   */
+  function resolveTabKey(route: RouteLocationNormalized): string {
+    const app = findPortalAppByPath(route.path);
+    if (app) return app.activeRule;
+    return route.path;
+  }
 
-    const exists = tabs.value.find((t) => t.path === path);
+  function resolveTabTitle(route: RouteLocationNormalized): string {
+    const app = findPortalAppByPath(route.path);
+    if (app) return app.title;
+    const { meta, name, path } = route;
+    return (meta?.title as string) || String(name || path);
+  }
+
+  function addTab(route: RouteLocationNormalized) {
+    const { fullPath, meta, name } = route;
+    if (!route.path || route.path === '/login' || meta?.hideInMenu) return;
+
+    const tabKey = resolveTabKey(route);
+    const exists = tabs.value.find((t) => t.path === tabKey);
     if (exists) {
-      activeKey.value = path;
+      exists.fullPath = fullPath;
+      exists.title = resolveTabTitle(route);
+      activeKey.value = tabKey;
       return;
     }
 
     tabs.value.push({
-      path,
+      path: tabKey,
       fullPath,
-      title: (meta?.title as string) || String(name || path),
+      title: resolveTabTitle(route),
       name: name ? String(name) : undefined,
       affix: !!meta?.affix,
     });
-    activeKey.value = path;
+    activeKey.value = tabKey;
   }
 
   function closeTab(path: string) {

@@ -5,9 +5,10 @@ export type LayoutMode = 'sidebar-nav' | 'sidebar-mixed-nav' | 'header-mixed-nav
 
 /** 经典侧栏 */
 export const SIDEBAR_NAV_WIDTH = 210;
-export const SIDEBAR_NAV_COLLAPSED_WIDTH = 64;
-/** 双列：左列根菜单 */
-export const MIXED_ROOT_WIDTH = 72;
+/** 经典侧栏折叠宽度（仅图标，宜 48px 左右） */
+export const SIDEBAR_NAV_COLLAPSED_WIDTH = 48;
+/** 双列：左列根菜单（图标 + 短文案） */
+export const MIXED_ROOT_WIDTH = 56;
 /** 双列：右列子菜单 */
 export const MIXED_SUB_WIDTH = 168;
 /** 混合：仅子菜单侧栏 */

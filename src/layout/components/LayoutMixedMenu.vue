@@ -44,9 +44,10 @@ const items = computed(() => props.menus);
 
 <style scoped lang="less">
 .mixed-menu {
-  width: 72px;
+  width: 100%;
+  min-width: 0;
   margin: 0;
-  padding: 8px 4px;
+  padding: 8px 2px;
   list-style: none;
 
   &__item {
@@ -54,7 +55,7 @@ const items = computed(() => props.menus);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px 4px;
+    padding: 8px 2px;
     margin-bottom: 4px;
     color: rgb(255 255 255 / 65%);
     cursor: pointer;
@@ -78,9 +79,9 @@ const items = computed(() => props.menus);
 
   &__name {
     width: 100%;
-    margin-top: 6px;
+    margin-top: 4px;
     overflow: hidden;
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;

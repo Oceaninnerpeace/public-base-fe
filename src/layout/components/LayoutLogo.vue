@@ -29,6 +29,11 @@ const layoutStore = useLayoutStore();
 
   &--dark {
     color: #fff;
+
+    .layout-logo__icon,
+    &__icon {
+      color: #fff;
+    }
   }
 
   &--light {
@@ -37,7 +42,15 @@ const layoutStore = useLayoutStore();
 
   &.is-collapsed {
     justify-content: center;
-    padding: 0;
+    padding: 0 6px;
+  }
+
+  &.is-collapsed &__icon {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 8px;
   }
 
   &__icon {

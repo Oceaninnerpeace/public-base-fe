@@ -9,7 +9,7 @@
 ## 使用
 
 ```ts
-import { Page, ProTable, ApiComponent, AccessControl, useModal } from '@/components';
+import { Page, ProTable, PbQueryBar, ApiComponent, AccessControl, useModal } from '@/components';
 ```
 
 ## 验证码 / 图片 / 上传
@@ -19,7 +19,8 @@ import { Page, ProTable, ApiComponent, AccessControl, useModal } from '@/compone
 | `SliderCaptcha` | 滑块验证码（登录页） |
 | `ImageCaptcha` | 图形字符验证码 |
 | `ImageCropper` | 图片裁剪（支持比例锁定） |
-| `FileUpload` | 文件上传（预览、大小限制、裁剪） |
+| `PbQueryBar` / `PbTable` / `PbForm` | 来自 `@Oceaninnerpeace/public-base-components` |
+| `FileUpload` | 基座扩展：上传（预览、裁剪） |
 
 ```vue
 <SliderCaptcha v-model="passed" @success="onSuccess" />

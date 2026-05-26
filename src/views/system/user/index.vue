@@ -1,29 +1,45 @@
 ﻿<script setup lang="ts">
 import {
   AccessControl,
-  ApiComponent,
   AppModal,
   BasicForm,
   Page,
+  PbQueryBar,
   ProTable,
 } from '@/components';
-import type { FormSchema } from '@/components/BasicForm/types';
+import type { FormSchema } from '@/components';
 import { useModal } from '@/hooks/useModal';
-import { Select } from 'ant-design-vue';
-import type { TableColumnType } from 'ant-design-vue';
+import type { PbTableColumn } from '@/components';
+import { ref } from 'vue';
 
-interface UserRow {
+interface UserRow extends Record<string, unknown> {
   id: string;
   username: string;
   nickname: string;
   role: string;
 }
 
-const columns: TableColumnType<UserRow>[] = [
-  { title: '用户名', dataIndex: 'username' },
-  { title: '昵称', dataIndex: 'nickname' },
-  { title: '角色', dataIndex: 'role' },
-  { title: '操作', key: 'action', width: 200 },
+const columns: PbTableColumn[] = [
+  { title: '用户名', dataIndex: 'username', exportable: true },
+  { title: '昵称', dataIndex: 'nickname', exportable: true },
+  { title: '角色', dataIndex: 'role', exportable: true },
+  { title: '操作', key: 'action', width: 200, exportable: false },
+];
+
+const query = ref<Record<string, unknown>>({});
+const tableRef = ref<{ reload: () => void } | null>(null);
+
+const queryFields = [
+  { field: 'username', label: '用户名', type: 'input' as const },
+  {
+    field: 'role',
+    label: '角色',
+    type: 'select' as const,
+    options: [
+      { label: '管理员', value: 'admin' },
+      { label: '普通用户', value: 'user' },
+    ],
+  },
 ];
 
 const { open, openModal, closeModal } = useModal();
@@ -49,20 +65,19 @@ async function fetchUsers(params: Record<string, unknown>) {
     { id: '2', username: 'user', nickname: '普通用户', role: 'user' },
   ];
   const keyword = String(params.username ?? '');
-  const filtered = keyword ? list.filter((u) => u.username.includes(keyword)) : list;
+  const role = String(params.role ?? '');
+  let filtered = keyword ? list.filter((u) => u.username.includes(keyword)) : list;
+  if (role) filtered = filtered.filter((u) => u.role === role);
   return { list: filtered, total: filtered.length };
-}
-
-async function fetchRoles() {
-  return [
-    { label: '管理员', value: 'admin' },
-    { label: '普通用户', value: 'user' },
-  ];
 }
 
 function onFormSubmit(values: Record<string, unknown>) {
   console.log('submit', values);
   closeModal();
+}
+
+function onSearch() {
+  tableRef.value?.reload();
 }
 </script>
 
@@ -74,22 +89,20 @@ function onFormSubmit(values: Record<string, unknown>) {
       </AccessControl>
     </template>
 
-    <ProTable :columns="columns" :request="fetchUsers">
-      <template #search="{ model }">
-        <a-form-item label="用户名">
-          <a-input v-model:value="model.username" allow-clear />
-        </a-form-item>
-        <a-form-item label="角色">
-          <ApiComponent
-            v-model:value="model.role"
-            :component="Select"
-            :api="fetchRoles"
-            allow-clear
-            placeholder="请选择角色"
-            style="width: 160px"
-          />
-        </a-form-item>
-      </template>
+    <PbQueryBar
+      v-model="query"
+      :fields="queryFields"
+      @search="onSearch"
+      @reset="onSearch"
+    />
+
+    <ProTable
+      ref="tableRef"
+      :columns="columns"
+      :search-params="query"
+      :request="fetchUsers"
+      export-filename="users"
+    >
       <template #toolbar>
         <a-space>
           <a-button v-auth="'system:user:export'">导出</a-button>

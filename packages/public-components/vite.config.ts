@@ -23,7 +23,13 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['vue', 'ant-design-vue', '@ant-design/icons-vue', /^ant-design-vue\//],
+      external: [
+        'vue',
+        'ant-design-vue',
+        '@ant-design/icons-vue',
+        'hls.js',
+        /^ant-design-vue\//,
+      ],
     },
   },
 })

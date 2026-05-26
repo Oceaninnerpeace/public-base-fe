@@ -1,5 +1,8 @@
+import '@Oceaninnerpeace/public-base-components/style.css';
 import 'ant-design-vue/dist/reset.css';
 import 'nprogress/nprogress.css';
+
+import { install as registerPublicComponents } from '@Oceaninnerpeace/public-base-components';
 
 import { setupLoadingDirective } from '@/directives/loading';
 import { setupMicroApps } from '@/micro';
@@ -28,6 +31,7 @@ export async function bootstrapApp() {
   setupGlobalErrorHandler(app);
 
   app.use(Antd);
+  app.use({ install: registerPublicComponents });
   app.use(router);
   setupEmbedBridge(router);
 

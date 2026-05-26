@@ -33,6 +33,20 @@ pnpm install
 pnpm run build:components
 ```
 
+## 基座已接入
+
+- `src/app.ts`：`app.use(PublicBaseComponents)` + 样式
+- `src/components/index.ts`：从包 re-export `Pb*` / `AppModal` 等别名
+- 示例：`views/system/user` 使用 `PbQueryBar` + `PbTable`
+
+Monorepo 内使用 `workspace:*`（与已发布 `0.1.0` 同源）；仅克隆基座仓库时改为：
+
+```json
+"@Oceaninnerpeace/public-base-components": "^0.1.0"
+```
+
+并配置根目录 `.npmrc`（见 `.npmrc.example`）。
+
 ## 子应用接入
 
 ```bash

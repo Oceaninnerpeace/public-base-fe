@@ -1,7 +1,10 @@
 ﻿<script setup lang="ts">
-import { Fallback } from '@/components';
+import { PbException } from '@/components';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 </script>
 
 <template>
-  <Fallback status="403" />
+  <PbException status="403" @back="router.push('/portal')" />
 </template>

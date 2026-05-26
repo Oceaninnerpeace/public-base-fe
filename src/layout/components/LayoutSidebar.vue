@@ -159,5 +159,84 @@ function onClassicClick({ key }: { key: string }) {
       color: #fff;
     }
   }
+
+  &--collapsed &__menu {
+    padding: 4px 6px;
+
+    :deep(.ant-menu-inline-collapsed) {
+      width: 100% !important;
+      background: transparent !important;
+    }
+
+    :deep(.ant-menu-title-content) {
+      display: none !important;
+      width: 0 !important;
+      max-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      opacity: 0 !important;
+    }
+
+    :deep(.ant-menu-item),
+    :deep(.ant-menu-submenu-title) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px !important;
+      height: 36px !important;
+      padding-inline: 0 !important;
+      margin: 4px auto !important;
+      line-height: 36px !important;
+      color: #fff;
+      background: transparent !important;
+      border-radius: 8px;
+    }
+
+    :deep(.ant-menu-item .anticon),
+    :deep(.ant-menu-submenu-title .anticon),
+    :deep(.ant-menu-item-icon) {
+      margin-inline-end: 0 !important;
+      color: #fff !important;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    :deep(.ant-menu-item svg) {
+      fill: currentColor;
+    }
+
+    :deep(.ant-menu-item-selected) {
+      color: #fff !important;
+      background: @primary-color !important;
+    }
+
+    :deep(.ant-menu-item-selected .anticon),
+    :deep(.ant-menu-item-selected .ant-menu-item-icon) {
+      color: #fff !important;
+    }
+
+    :deep(.ant-menu-item-selected::after) {
+      display: none;
+    }
+
+    :deep(.ant-menu-item:not(.ant-menu-item-selected):hover),
+    :deep(.ant-menu-submenu-title:hover) {
+      color: #fff !important;
+      background: rgb(255 255 255 / 8%) !important;
+    }
+
+    :deep(.ant-menu-item:not(.ant-menu-item-selected):hover .anticon) {
+      color: #fff !important;
+    }
+  }
+
+  &--collapsed &__footer &__collapse {
+    color: #fff;
+  }
+
+  &--collapsed &__footer {
+    padding-inline: 6px;
+  }
 }
 </style>
